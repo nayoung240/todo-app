@@ -11,8 +11,14 @@ $ yarn create react-app todo-app
 $ yarn add sass classnames react-icons
 ```
 
-### UI 컴포넌트 구성
-1. todotemplate
-2. todoinsert
-3. todolistitem
-4. todolist
+### 컴포넌트 구조
+App.js -- todotemplate
+       -- todoinsert
+       -- todolist -- todolistitem
+
+
+### import
+- 아이콘
+react-icons/md - MdCheckBoxOutlineBlank, MdCheckBox, MdRemoveCircleOutline, MdAdd
+- 클래스명
+classnames - cn
