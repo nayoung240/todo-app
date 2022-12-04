@@ -28,6 +28,7 @@ const App = () => {
   // useRef를 사용하여 컴포넌트에서 사용할 변수를 만든다.
   const nextId = useRef(4)
 
+  // todo 추가
   const onInsert = useCallback(text => {
       const todo = {
         id: nextId.current,
@@ -37,13 +38,24 @@ const App = () => {
 
       setTodos(todos.concat(todo))
       nextId.current += 1
-    }, [todos]
-  )
+  }, [todos])
+
+  // todo 삭제
+  const onRemove = useCallback(id => {
+    const nextTodos = todos.filter(todo => todo.id !== id)
+    setTodos(nextTodos)
+  }, [todos])
+
+  // todo 체크박스 수정
+  const onToggle = useCallback(id => {
+    const editTodos = todos.map(todo => todo.id === id ? {...todo, checked: !todo.checked} : todo)
+    setTodos(editTodos)
+  }, [todos])
 
   return (
     <TodoTemplate>
       <TodoInsert onInsert={onInsert}/>
-      <TodoList todos={todos}/>
+      <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle}/>
     </TodoTemplate>
   )
 }
