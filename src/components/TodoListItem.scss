@@ -2,9 +2,6 @@
     padding: 1rem;
     display: flex;
     align-items: center;
-    &:nth-child(even) {
-        background: lightgrey;
-    }
 
     .checkbox {
         cursor: pointer;
@@ -36,7 +33,13 @@
             color: darkred;
         }
     }
-    & + & {
-        border-top: 1px solid lightgrey;
+    
+    .TodoListItem-virtualized {
+        & + & {
+            border-top: 1px solid lightgrey;
+        }
+        &:nth-child(even) {
+            background: lightgrey;
+        }
     }
 }

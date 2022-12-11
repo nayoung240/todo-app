@@ -1,15 +1,28 @@
 import TodoListItem from "./TodoListItem";
 import './TodoList.scss'
-import React from "react";
+import React, { useCallback } from "react";
+import { List } from "react-virtualized";
 
 const TodoList = ({todos, onRemove, onToggle}) => {
+    // 항목을 렌더링할 때 쓰는 함수
+    const rowRenderer = useCallback(({index, key, style}) => {
+        const todo = todos[index]
+        return (
+            <TodoListItem todo={todo} key={todo.id} onRemove={onRemove} onToggle={onToggle} style={style}/>
+        )
+    }, [onRemove, onToggle, todos])
+
     return (
-        // map을 사용해서 컴포넌트로 변환할 때는 key props(고윳값)를 전달해줘야 한다.
-        <div className="TodoList">
-            {todos.map(todo => (
-                <TodoListItem todo={todo} key={todo.id} onRemove={onRemove} onToggle={onToggle}/>
-            ))}
-        </div>
+        <List 
+            className="TodoList" 
+            width={512}
+            height={513}
+            rowCount={todos.length}
+            rowHeight={57}
+            rowRenderer={rowRenderer}
+            list={todos}
+            style={{outline:'none'}}
+        />
     )
 }
 
